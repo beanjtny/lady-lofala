@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lady Loafella Redesign</title>
+<meta name="description" content="Lady Loafella is a woman-owned bread boutique in Kozhikode, Malabar. Handcrafted sourdough, loaves, croissant sandwiches and world-flavour bakes in a garden hideaway.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="https://ladyloafella.com/wp-content/uploads/2023/03/cropped-icon-lf-270x270.png">
+<style>
+:root{
+  --plum:#0B4F5F;
+  --plum-2:#126B80;
+  --paper:#F3FBFD;
+  --white:#FFFFFF;
+  --gold:#22D3EE;
+  --gold-deep:#0E7490;
+  --sage:#0E7490;
+  --blush:#D5F2F8;
+  --ink:#0B2A33;
+  --muted:#4B6A74;
+  --line:rgba(11,79,95,.16);
+  --nav-h:68px;
+  --display:'Instrument Serif',Georgia,serif;
+  --body:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--body);font-size:1.0625rem;line-height:1.65;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;line-height:1.12;letter-spacing:-.01em}
+p{max-width:62ch}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--gold);color:var(--plum);padding:10px 16px;border-radius:8px;z-index:200;font-weight:600}
+.skip:focus{left:8px}
+section{scroll-margin-top:calc(var(--nav-h) + 8px)}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.4rem;border-radius:999px;font-weight:600;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s;font-family:var(--body)}
+.btn-gold{background:var(--gold);color:var(--plum)}
+.btn-gold:hover{background:#67E8F9}
+.btn-line{border-color:rgba(255,255,255,.45);color:var(--white)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold)}
+.btn-dark{background:var(--plum);color:var(--white)}
+.btn-dark:hover{background:var(--plum-2)}
+.btn-outline-dark{border-color:var(--plum);color:var(--plum)}
+.btn-outline-dark:hover{background:var(--plum);color:var(--white)}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);background:rgba(11,79,95,.94);backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,.08)}
+.nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo img{height:40px;width:auto}
+.menu-links{display:flex;align-items:center;gap:.25rem;list-style:none}
+.menu-links a{display:block;padding:.55rem .95rem;border-radius:999px;color:rgba(255,255,255,.82);text-decoration:none;font-weight:500;font-size:.98rem;transition:color .2s,background .2s}
+.menu-links a:hover{color:var(--white);background:rgba(255,255,255,.08)}
+.menu-links a.active{color:var(--plum);background:var(--gold)}
+.nav .btn{min-height:42px;font-size:.95rem}
+.burger{display:none;background:none;border:0;color:var(--white);width:48px;height:48px;border-radius:10px;cursor:pointer}
+.burger span{display:block;width:24px;height:2px;background:currentColor;margin:5px auto;transition:transform .25s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* hero */
+.hero{background:radial-gradient(900px 500px at 82% 30%,rgba(34,211,238,.28),transparent 60%),var(--plum);color:var(--white);padding:calc(var(--nav-h) + 56px) 0 88px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.7rem,6.2vw,5.2rem);margin-bottom:1.3rem}
+.hero p.lead{font-size:1.2rem;color:rgba(255,255,255,.82);margin-bottom:2rem}
+.hero .cta{display:flex;flex-wrap:wrap;gap:.8rem}
+.hero .where{margin-top:1.8rem;color:rgba(255,255,255,.62);font-size:.95rem}
+.arches{position:relative;height:540px}
+.arch{position:absolute;overflow:hidden;border-radius:999px 999px 0 0;background:var(--plum-2)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.arch.a1{right:0;top:0;width:min(330px,62%);height:480px;border:6px solid var(--gold)}
+.arch.a2{left:0;bottom:0;width:min(220px,44%);height:300px;border:6px solid var(--paper)}
+.rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.rise.d1{animation-delay:.12s}.rise.d2{animation-delay:.24s}.rise.d3{animation-delay:.36s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+/* shared section */
+.sec{padding:96px 0}
+.sec h2{font-size:clamp(2rem,4.2vw,3.2rem);margin-bottom:1.1rem}
+.sec p+p{margin-top:1rem}
+
+/* story */
+.story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.story h2{font-size:clamp(2.1rem,4.6vw,3.6rem)}
+.quote{margin-top:2rem;padding-left:1.2rem;border-left:4px solid var(--gold);font-family:var(--display);font-size:1.35rem;line-height:1.35;color:var(--plum)}
+.story .body p{font-size:1.12rem}
+
+/* owner */
+.owner{background:var(--white)}
+.owner .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px;align-items:center}
+.owner .portrait{border-radius:999px 999px 0 0;overflow:hidden;border:6px solid var(--blush);max-width:420px;aspect-ratio:3/4;background:var(--blush)}
+.owner .portrait img{width:100%;height:100%;object-fit:cover}
+.facts{display:grid;gap:1.4rem;margin-top:2rem}
+.fact{display:grid;grid-template-columns:84px 1fr;gap:1.1rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+.fact b{font-family:var(--display);font-weight:400;font-size:1.7rem;color:var(--gold-deep);line-height:1.1}
+.fact h3{font-family:var(--body);font-weight:700;font-size:1.05rem;letter-spacing:0;margin-bottom:.25rem}
+.fact p{color:var(--muted);font-size:1rem}
+
+/* purpose */
+.purpose{background:var(--plum);color:var(--white)}
+.purpose .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.purpose .col{padding:0 36px;border-left:1px solid rgba(255,255,255,.18)}
+.purpose .col:first-child{padding-left:0;border-left:0}
+.purpose h3{font-size:1.9rem;color:var(--gold);margin-bottom:.8rem}
+.purpose p{color:rgba(255,255,255,.82)}
+.purpose .intro{margin-bottom:3rem}
+.purpose .intro h2{max-width:20ch}
+
+/* forte */
+.forte{background:var(--blush)}
+.forte .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.forte ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 40px;margin-top:2rem}
+.forte li{font-family:var(--display);font-size:1.35rem;line-height:1.25;padding:1.15rem 0;border-top:1px solid rgba(11,79,95,.25);color:var(--plum)}
+.forte .pic{border-radius:999px 999px 0 0;overflow:hidden;border:6px solid var(--paper);aspect-ratio:3/4;max-width:400px;justify-self:end;background:var(--paper)}
+.forte .pic img{width:100%;height:100%;object-fit:cover}
+
+/* menu */
+.menu-sec .head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
+.menu-sec .head p{color:var(--muted);font-size:1.1rem}
+.tools{position:sticky;top:var(--nav-h);z-index:40;background:var(--paper);padding:14px 0 12px;border-bottom:1px solid var(--line)}
+.search{position:relative;max-width:420px;margin-bottom:12px}
+.search input{width:100%;height:48px;border-radius:999px;border:2px solid var(--line);background:var(--white);padding:0 1.2rem 0 2.9rem;font:inherit;font-size:1rem;color:var(--ink)}
+.search input:focus{border-color:var(--plum);outline:none}
+.search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--muted)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.tab{flex:none;min-height:42px;padding:0 1.1rem;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-weight:600;font-size:.95rem;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
+.tab:hover{border-color:var(--plum)}
+.tab[aria-pressed="true"]{background:var(--plum);border-color:var(--plum);color:var(--white)}
+.count{margin:1.4rem 0 .4rem;color:var(--muted);font-size:.95rem}
+.cat{margin-top:2.6rem}
+.cat>h3{font-size:2rem;color:var(--plum);padding-bottom:.7rem;border-bottom:2px solid var(--gold);margin-bottom:1.4rem}
+.cat h4{font-family:var(--body);font-weight:700;font-size:1.05rem;letter-spacing:0;margin:1.8rem 0 .9rem;color:var(--sage)}
+.dishes{display:grid;grid-template-columns:1fr 1fr;gap:18px 32px}
+.dish{display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:start;background:var(--white);border-radius:18px;padding:14px;border:1px solid var(--line)}
+.dish.noimg{grid-template-columns:1fr}
+.dish .ph{width:104px;height:104px;border-radius:999px 999px 14px 14px;overflow:hidden;background:var(--blush)}
+.dish .ph img{width:100%;height:100%;object-fit:cover}
+.dish h5{font-family:var(--display);font-weight:400;font-size:1.2rem;line-height:1.2;color:var(--plum);margin-bottom:.3rem}
+.dish p{font-size:.95rem;color:var(--muted);line-height:1.5}
+.more{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.1rem;list-style:none}
+.more li{padding:.4rem .95rem;border-radius:999px;background:var(--white);border:1px solid var(--line);font-size:.95rem}
+.more-label{margin-top:1.4rem;font-size:.95rem;color:var(--muted);font-weight:600}
+.empty{padding:3rem 0;text-align:center;color:var(--muted)}
+.empty button{margin-top:1rem}
+
+/* gallery */
+.gallery{background:var(--white)}
+.gallery .head{max-width:640px;margin-bottom:2.4rem}
+.masonry{columns:3 260px;column-gap:14px}
+.masonry button{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:var(--blush);border-radius:16px;overflow:hidden;cursor:zoom-in;break-inside:avoid}
+.masonry img{width:100%;height:auto;transition:transform .5s}
+.masonry button:hover img{transform:scale(1.04)}
+dialog.lb{border:0;background:transparent;max-width:100vw;max-height:100vh;width:100%;height:100%;padding:0}
+dialog.lb::backdrop{background:rgba(5,30,38,.92)}
+.lb-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:56px 16px}
+.lb img{max-width:min(1100px,100%);max-height:100%;border-radius:12px;object-fit:contain}
+.lb-btn{position:absolute;background:rgba(255,255,255,.14);color:var(--white);border:0;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+.lb-btn:hover{background:rgba(255,255,255,.3)}
+.lb-close{top:12px;right:12px}.lb-prev{left:12px;top:50%}.lb-next{right:12px;top:50%}
+
+/* reviews */
+.reviews{background:var(--sage);color:var(--white);text-align:center}
+.reviews .wrap{display:flex;flex-direction:column;align-items:center}
+.reviews h2{max-width:18ch}
+.reviews p{margin-inline:auto;color:rgba(255,255,255,.9);margin-bottom:1.8rem}
+
+/* contact */
+.contact .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:stretch}
+.info{display:grid;gap:1.4rem;margin:1.6rem 0 2rem;list-style:none}
+.info li{display:grid;grid-template-columns:48px 1fr;gap:1rem;align-items:center}
+.info .ic{width:48px;height:48px;border-radius:50%;background:var(--plum);color:var(--gold);display:grid;place-items:center}
+.info .ic svg{width:22px;height:22px}
+.info a{text-decoration:none;font-weight:600;font-size:1.12rem}
+.info a:hover{text-decoration:underline}
+.info span.t{font-weight:600;font-size:1.05rem;line-height:1.4}
+.order{display:flex;flex-wrap:wrap;gap:.7rem}
+.map{min-height:420px;border-radius:999px 999px 24px 24px;overflow:hidden;border:6px solid var(--plum);background:var(--blush)}
+.map iframe{width:100%;height:100%;min-height:420px;border:0;display:block}
+
+/* footer */
+footer{background:var(--plum);color:rgba(255,255,255,.8);padding:64px 0 32px}
+footer .top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.14)}
+footer img{height:48px;width:auto;margin-bottom:1rem}
+footer h4{font-family:var(--body);font-weight:700;font-size:1rem;letter-spacing:0;color:var(--gold);margin-bottom:.9rem}
+footer ul{list-style:none;display:grid;gap:.5rem}
+footer a{text-decoration:none}
+footer a:hover{color:var(--gold);text-decoration:underline}
+footer .bottom{padding-top:24px;font-size:.92rem;color:rgba(255,255,255,.6)}
+
+/* mobile action bar */
+.bar{display:none}
+
+@media (max-width:960px){
+  .hero .wrap,.story .wrap,.owner .wrap,.forte .wrap,.contact .wrap{grid-template-columns:1fr;gap:44px}
+  .arches{height:440px;max-width:460px;margin-inline:auto;width:100%}
+  .arch.a1{height:400px}
+  .arch.a2{height:240px}
+  .owner .portrait,.forte .pic{justify-self:center}
+  .purpose .grid{grid-template-columns:1fr;gap:2rem}
+  .purpose .col{padding:2rem 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.18)}
+  .purpose .col:first-child{padding-top:0;border-top:0}
+  footer .top{grid-template-columns:1fr 1fr}
+  footer .top>div:first-child{grid-column:1/-1}
+}
+@media (max-width:860px){
+  .burger{display:block}
+  .nav .btn{display:none}
+  .menu-links{position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--plum);padding:12px 20px 24px;border-bottom:1px solid rgba(255,255,255,.1);transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s}
+  .menu-links.open{transform:none;opacity:1;visibility:visible}
+  .menu-links a{padding:.95rem 1rem;font-size:1.1rem;border-radius:12px}
+}
+@media (max-width:720px){
+  .sec{padding:68px 0}
+  .dishes{grid-template-columns:1fr}
+  .forte ul{grid-template-columns:1fr}
+  .hero{padding-top:calc(var(--nav-h) + 36px);padding-bottom:64px}
+  body{padding-bottom:68px}
+  .bar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:90;background:var(--plum);border-top:1px solid rgba(255,255,255,.12)}
+  .bar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:64px;color:var(--white);text-decoration:none;font-size:.82rem;font-weight:600}
+  .bar svg{width:22px;height:22px;color:var(--gold)}
+  .fact{grid-template-columns:64px 1fr}
+  footer .top{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rise{animation:none}
+  *{transition:none!important}
+}
+/* scroll experience */
+.progress{position:fixed;top:var(--nav-h);left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--gold);z-index:101;pointer-events:none}
+.totop{position:fixed;right:18px;bottom:22px;width:48px;height:48px;border-radius:50%;border:0;background:var(--plum);color:var(--white);cursor:pointer;z-index:95;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s;box-shadow:0 6px 18px rgba(11,79,95,.3)}
+.totop.show{opacity:1;visibility:visible;transform:none}
+.totop svg{width:22px;height:22px}
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.noimg-fallback{background:linear-gradient(135deg,var(--blush),#fff)!important;display:grid;place-items:center;color:var(--gold-deep);font-family:var(--display);font-size:1.4rem}
+.noimg-fallback::after{content:'LL'}
+.masonry button.noimg-fallback{min-height:180px}
+@media (max-width:720px){.totop{bottom:80px;right:14px}}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.progress{display:none}}
+/* scroll scenes */
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .1em}
+.hero h1 .w>span{display:inline-block;animation:wordUp 1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes wordUp{from{transform:translateY(105%)}to{transform:none}}
+.arch img,.owner .portrait img,.forte .pic img{will-change:transform}
+.story h2 .sw{color:rgba(11,79,95,.2);transition:color .35s}
+.story h2 .sw.on{color:var(--plum)}
+.marq{background:var(--gold);color:var(--plum);overflow:hidden;padding:22px 0;display:grid;gap:6px;border-block:1px solid rgba(11,79,95,.2)}
+.marq .row{display:flex;white-space:nowrap;width:max-content;font-family:var(--display);font-size:clamp(1.8rem,4vw,3rem);line-height:1.2;will-change:transform}
+.marq .row span{padding-right:1.4rem}
+.marq .row i{font-style:normal;padding-right:1.4rem;opacity:.55}
+.marq .row.out span{color:transparent;-webkit-text-stroke:1.5px var(--plum)}
+.purpose .grid{display:block}
+.purpose .grid .col{position:sticky;top:calc(var(--nav-h) + 24px + var(--i,0) * 22px);background:var(--plum-2);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:36px 40px;margin-bottom:44px;min-height:210px;transform-origin:50% 0;will-change:transform}
+.purpose .grid .col:nth-child(2){--i:1}
+.purpose .grid .col:nth-child(3){--i:2;margin-bottom:0}
+.purpose .grid .col p{max-width:60ch;font-size:1.12rem}
+.forte li:nth-child(2){transition-delay:.07s}.forte li:nth-child(3){transition-delay:.14s}.forte li:nth-child(4){transition-delay:.21s}.forte li:nth-child(5){transition-delay:.28s}.forte li:nth-child(6){transition-delay:.35s}
+.js .masonry button.reveal{transform:scale(.94) translateY(24px)}
+.js .masonry button.reveal.in{transform:none}
+@media (max-width:720px){.purpose .grid .col{padding:26px 24px}}
+/* type system: roman + italic serif display, uppercase grotesk labels */
+h1,h2,h3,h4{letter-spacing:-.02em}
+h1 em,h2 em,.story h2 .sw.it{font-style:italic}
+.hero h1{font-size:clamp(3.2rem,8vw,6.8rem);line-height:.98}
+.sec h2{font-size:clamp(2.4rem,5vw,4rem);line-height:1.02}
+.story h2{font-size:clamp(2.6rem,5.6vw,4.6rem)}
+.purpose h3{font-size:2.3rem}
+.cat>h3{font-size:2.4rem}
+.dish h5{font-size:1.4rem}
+.forte li{font-size:1.6rem}
+.quote{font-size:1.6rem}
+.btn{text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;font-weight:700}
+.menu-links a{text-transform:uppercase;letter-spacing:.07em;font-size:.8rem;font-weight:600}
+.tab{text-transform:uppercase;letter-spacing:.06em;font-size:.78rem;font-weight:700}
+.marq .row{font-family:var(--body);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(1.1rem,2.2vw,1.6rem)}
+.marq .row.out span{-webkit-text-stroke:1px var(--plum)}
+footer h4,.cat h4,.more-label{text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;font-family:var(--body);font-weight:700}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<button class="totop" id="totop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"/></svg></button>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#home" aria-label="Lady Loafella, home"><img src="https://ladyloafella.com/wp-content/uploads/2022/07/logo-white.png" alt="Lady Loafella"></a>
+    <nav aria-label="Main">
+      <ul class="menu-links" id="links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-gold" href="https://www.swiggy.com/restaurants/lady-loafella-mavoor-kozhikode-528208?sld=false" target="_blank" rel="noopener">Order online</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="links" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HOME -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <h1 class="rise">A Royal Bread Boutique Experience</h1>
+      <p class="lead rise d1">Handcrafted breads and bakes from around the world, served in a garden hideaway in the heart of Malabar.</p>
+      <div class="cta rise d2">
+        <a class="btn btn-gold" href="#menu">View the menu</a>
+        <a class="btn btn-line" href="https://www.swiggy.com/restaurants/lady-loafella-mavoor-kozhikode-528208?sld=false" target="_blank" rel="noopener">Order on Swiggy</a>
+        <a class="btn btn-line" href="https://link.zomato.com/xqzv/rshare?id=46158919fe1b9a11" target="_blank" rel="noopener">Order on Zomato</a>
+      </div>
+      <p class="where rise d3">Meenchanda, Kozhikode, Kerala</p>
+    </div>
+    <div class="arches" aria-hidden="false">
+      <div class="arch a1 rise d1"><img src="https://ladyloafella.com/wp-content/uploads/2022/05/lady-lofella-outdoor-1.png" alt="The garden courtyard at Lady Loafella"></div>
+      <div class="arch a2 rise d3"><img src="https://ladyloafella.com/wp-content/uploads/2025/12/Untitled-1.jpg" alt="Croque Madame with a sunny-side-up egg"></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq" aria-hidden="true"><div class="row"></div><div class="row out"></div></div>
+
+<!-- ABOUT: STORY -->
+<section class="sec story" id="about">
+  <div class="wrap">
+    <div>
+      <h2>There once lived a girl who believed fairy tales were real.</h2>
+      <p class="quote">&ldquo;Behind every Good Taste is a Great Story that paved its way to it!&rdquo;</p>
+    </div>
+    <div class="body">
+      <p>Little did she know that she would manifest the beautiful house she had heard about in one such story into reality through Lady Loafella.</p>
+      <p>A hide-out away from the urban life, a garden yard filled with the chirpings of birds and waves of laughter of kids and grown-ups alike.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT: OWNER -->
+<section class="sec owner" aria-labelledby="owner-h">
+  <div class="wrap">
+    <div class="portrait"><img src="https://ladyloafella.com/wp-content/uploads/2022/05/lady-lofella-with-basket-1.png" alt="The lady behind Lady Loafella with a basket of fresh bread" loading="lazy"></div>
+    <div>
+      <h2 id="owner-h">Meet the lady behind <em>Lady Loafella</em></h2>
+      <p>Lady Loafella is a woman-owned enterprise and a reflection of strong dedication and passion for baking, without compromising an inch on quality and integrity.</p>
+      <p>Each bake from our oven is a product of love and labour, handcrafted and served with the smallest details taken care of. From the quality of the ingredients to the aesthetics of the product, every item on the menu will take you to a different part of the globe.</p>
+      <div class="facts">
+        <div class="fact">
+          <b>2011</b>
+          <div>
+            <h3>From interior design to loaves</h3>
+            <p>She poured her creative spirit from interior designing into the world of loaves and bakes.</p>
+          </div>
+        </div>
+        <div class="fact">
+          <b>3 years</b>
+          <div>
+            <h3>An expedition of discovery</h3>
+            <p>Research into loaves from across the globe, plus relentless training and tasting, until she could set the chef&rsquo;s hat straight and bring the best breads to her hometown. She knew she was creating a new culture and an experience that few had access to until then.</p>
+          </div>
+        </div>
+        <div class="fact">
+          <b>Ella</b>
+          <div>
+            <h3>The name behind the name</h3>
+            <p>She was brought into the world of baking by one of her best friends. Ella represents Lady Loafella and her journey to bring world classics into the heart of Malabar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION / GOAL / VISION -->
+<section class="sec purpose" aria-labelledby="purpose-h">
+  <div class="wrap">
+    <div class="intro"><h2 id="purpose-h">What we are building, <em>one loaf at a time</em></h2></div>
+    <div class="grid">
+      <div class="col">
+        <h3>Our Mission</h3>
+        <p>To continue to be the distinctive Royal Bread Boutique Experience that we are. To be nothing like the rest and still be the best of all, with incomparable quality of products and services.</p>
+      </div>
+      <div class="col">
+        <h3>Our Goal</h3>
+        <p>To pave the way to a never-before bread boutique experience in the region. To create a feeling of travelling through the streets of Europe with authentic taste and flavour through our fresh bakes.</p>
+      </div>
+      <div class="col">
+        <h3>Our Vision</h3>
+        <p>To be the grinding force that binds and inspires bakers to turn their baker dreams into reality. To be the facade of women entrepreneurship for passionate lady bakers from across the globe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORTE -->
+<section class="sec forte" aria-labelledby="forte-h">
+  <div class="wrap">
+    <div>
+      <h2 id="forte-h">Our <em>Forte</em></h2>
+      <ul>
+        <li>A Global Experience</li>
+        <li>Incorporation of Local Flavours</li>
+        <li>International Quality Standards</li>
+        <li>Plastic Free Environment</li>
+        <li>A Hallmark Destination in Malabar</li>
+        <li>Seasonal Menu Changes</li>
+      </ul>
+    </div>
+    <div class="pic"><img src="https://ladyloafella.com/wp-content/uploads/2022/05/lady-lofella-basket-pic-1.png" alt="A basket of freshly baked bread" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="sec menu-sec" id="menu">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h2>The Bread Boutique <em>menu</em></h2>
+        <p>Freshly baked special sourdough breads, loaves, croissant sandwiches and more. Pick a category or search for a dish.</p>
+      </div>
+    </div>
+  </div>
+  <div class="tools">
+    <div class="wrap">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search the menu" aria-label="Search the menu" autocomplete="off">
+      </div>
+      <div class="tabs" id="tabs" role="group" aria-label="Menu categories"></div>
+    </div>
+  </div>
+  <div class="wrap" id="menu-out" aria-live="polite"></div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery" id="gallery">
+  <div class="wrap">
+    <div class="head">
+      <h2>The Bread Boutique, <em>in pictures</em></h2>
+      <p>Witness the first-of-its-kind bread boutique experience in your region and indulge in the goodness of freshly baked sourdough breads, different types of bread loaves, croissant sandwiches and more.</p>
+    </div>
+    <div class="masonry" id="masonry"></div>
+  </div>
+</section>
+<dialog class="lb" id="lb" aria-label="Photo viewer">
+  <div class="lb-inner"><img id="lb-img" alt=""></div>
+  <button class="lb-btn lb-close" id="lb-close" aria-label="Close photo">&times;</button>
+  <button class="lb-btn lb-prev" id="lb-prev" aria-label="Previous photo">&lsaquo;</button>
+  <button class="lb-btn lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button>
+</dialog>
+
+<!-- REVIEWS -->
+<section class="sec reviews" aria-labelledby="rev-h">
+  <div class="wrap">
+    <h2 id="rev-h">Been to Lady Loafella? <em>Tell us how it was.</em></h2>
+    <p>Your words help others find us, and help us keep getting better.</p>
+    <a class="btn btn-gold" href="https://bit.ly/3BkhNLG" target="_blank" rel="noopener">Leave your thoughts</a>
+    <!-- Slot: paste the original site's customer-review embed here to show live testimonials above the button. -->
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Contact <em>Us</em></h2>
+      <p>Call ahead, write to us, or just come find the garden.</p>
+      <ul class="info">
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <a href="tel:+919207111777">+91 9207 111777</a>
+        </li>
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+          <a href="mailto:ladyloafella@gmail.com">ladyloafella@gmail.com</a>
+        </li>
+        <li>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="t">Opp. R.K Mission High School, Meenchanda, Kozhikode, Kerala 673018</span>
+        </li>
+      </ul>
+      <div class="order">
+        <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&query=Lady+Loafella+Meenchanda+Kozhikode" target="_blank" rel="noopener">Get directions</a>
+        <a class="btn btn-outline-dark" href="https://www.swiggy.com/restaurants/lady-loafella-mavoor-kozhikode-528208?sld=false" target="_blank" rel="noopener">Swiggy</a>
+        <a class="btn btn-outline-dark" href="https://link.zomato.com/xqzv/rshare?id=46158919fe1b9a11" target="_blank" rel="noopener">Zomato</a>
+      </div>
+    </div>
+    <div class="map">
+      <iframe title="Map showing Lady Loafella in Meenchanda, Kozhikode" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15654.300936345471!2d75.7940554!3d11.2190306!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x403399ccb642636b!2sLady%20Loafella!5e0!3m2!1sen!2sin!4v1653549528498!5m2!1sen!2sin"></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <a href="#home"><img src="https://ladyloafella.com/wp-content/uploads/2022/07/logo-white.png" alt="Lady Loafella"></a>
+        <p>A woman-owned Royal Bread Boutique in the heart of Malabar.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#home">Home Page</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow and order</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/LadyLoafella/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.instagram.com/lady_loafella/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.swiggy.com/restaurants/lady-loafella-mavoor-kozhikode-528208?sld=false" target="_blank" rel="noopener">Order on Swiggy</a></li>
+          <li><a href="https://link.zomato.com/xqzv/rshare?id=46158919fe1b9a11" target="_blank" rel="noopener">Order on Zomato</a></li>
+          <li><a href="https://ladyloafella.com/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="https://ladyloafella.com/terms-of-use/">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="bottom">&copy; Lady Loafella. All rights reserved.</p>
+  </div>
+</footer>
+
+<nav class="bar" aria-label="Quick actions">
+  <a href="tel:+919207111777"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Call</a>
+  <a href="#menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Menu</a>
+  <a href="https://www.google.com/maps/search/?api=1&query=Lady+Loafella+Meenchanda+Kozhikode" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>Directions</a>
+</nav>
+
+<script>
+/* ---------- MENU DATA ---------- */
+const P='https://ladyloafella.com/wp-content/uploads/2025/12/';
+const B='https://ladyloafella.com/wp-content/uploads/2026/01/';
+const D=(n,d,i,base)=>({n,d:d||'',i:i?(base||P)+i:''});
+const MENU=[
+ {name:'All Day Breakfast',groups:[{items:[
+  D('Croque Madame','The toasted French-style sandwich, filled with chicken ham slices and cheese, covered with cheesy béchamel sauce, topped with a single egg sunny side up, served with house salad and hash brown.','Untitled-1-300x300.jpg'),
+  D('Cilantro-Infused Spinach and Feta Omelette','3 eggs, coriander-scented spinach omelette stuffed with creamy truffle mashed potatoes, Danish feta and red cheddar, served with grilled chicken sausage, hash brown potatoes, side salad and sourdough toast.','2-8-300x300.jpg'),
+  D('Truffle Eggs on Toast','A savoury French toast loaded with soft scrambled eggs and truffle oil-infused creamy mushroom sauce.','3-3-300x300.jpg'),
+  D('Hazelnut French Toast','','4-2-300x300.jpg'),
+  D('Blueberry French Toast','','5-1-300x300.jpg')
+ ],more:['Croque Monsieur']}]},
+ {name:'Starters',groups:[{items:[
+  D('Four Cheese Garlic Bread','Ciabatta with butter, garlic, herbs and loaded with mozzarella, parmesan, American red cheddar and feta cheese, perfectly gratinated.','1-300x300.jpg'),
+  D('Korean Cream Cheese Garlic Bread','Ella’s freshly baked brioche bun, stuffed with cream cheese and honey butter, toasted.','2-300x300.jpg'),
+  D('Greek Style Loaded Hummus','A classical creamy tahini hummus loaded with Kalamata olives, Danish feta, cherry tomatoes and cucumbers, served with pita bread.','3-300x300.jpg'),
+  D('Hummus & Beef','A classical creamy tahini hummus loaded with spiced beef chunks, buttered corn and green peas, served with pita bread.','4-300x300.jpg'),
+  D('Petite Vol-Au-Vent','Creamy curried corn and broccoli, or creamy chicken and mushrooms.','5-300x300.jpg'),
+  D('Dips & Chips with Pickled Chilli Hummus','Well-seasoned pickled chilli hummus, served with lavash sticks and salad.','6-300x300.jpg'),
+  D('Cheese Stuffed Mexican Yellow Chilli','Bajji chilli stuffed with paprika-spiced mozzarella, feta cheese and grilled onions, panko crumbed and fried, served with sour cream and tomato salsa.','7-300x300.jpg'),
+  D('Beef Keema Flaky Pin Wheels','Flavoured minced beef, stuffed inside flaky puff pastry, topped with mayonnaise and orange chilli jam.','8-300x300.jpg'),
+  D('Trio Di Bruschetta','Pesto and cherry tomatoes, ratatouille, and roasted mushrooms.','9-300x300.jpg')
+ ],more:['French Fries','Potato Wedges','Sourdough Butter Garlic Bread','BBQ Chicken Wings','Jalapeno and Cheddar Cheese Twists']}]},
+ {name:'Salads',groups:[{items:[
+  D('Beet & Arugula Salad','Well-marinated roasted beetroot, mixed with arugula, fresh lettuces, tomatoes, orange segments, strawberry, feta cheese and walnuts, with ginger honey lemon dressing on the side.','2-1-300x300.jpg'),
+  D('Quinoa Salad','Steamed quinoa, shallot confit, tomatoes, cucumber and mixed lettuces with lemon vinaigrette dressing.','1-1-300x300.jpg')
+ ],more:['Crunchy Caesar Salad (Veg / Chicken)']}]},
+ {name:'Soups',groups:[{items:[
+  D('French Onion Soup','','1-4-300x300.jpg')
+ ],more:['Cilantro Creamy Chicken Soup']}]},
+ {name:'Hand Stretched Pizza Breads',groups:[{items:[
+  D('Pepperoni Chicken and Cheese','','1-2-300x300.jpg'),
+  D('Arugula, Peanut Basil Pesto and Ricotta','Topped with arugula, cherry tomatoes, sundried tomatoes, olives, fresh onions, ricotta and parmesan cheese.','2-2-300x300.jpg')
+ ],more:[]}]},
+ {name:'Wraps',groups:[{items:[
+  D('Grilled Cottage Cheese and Mushrooms','Grilled exotic vegetables, cottage cheese, bell peppers, mushrooms, onions, jalapenos, mozzarella and red cheddar cheese.','1-3-300x300.jpg')
+ ],more:['Philly Cheese Steak','Sweet Chilli Chicken']}]},
+ {name:'Loaded Sourdoughs',groups:[{items:[
+  D('Avocado Caprese','Loaded with melty mozzarella, juicy tomatoes, fresh basil pesto, avocado, arugula and balsamic drizzle.','1-6-300x300.jpg')
+ ],more:['Gouda Steak and Bacon']}]},
+ {name:'White Loaf Bread Fillings',groups:[{items:[
+  D('French Onion, Mushroom and Cheese','Thyme-infused roasted mushrooms, caramelized onions, red cheddar and mozzarella cheese, filled and grilled.','1-5-300x300.jpg')
+ ],more:['Pepperoni, Tomato and Cheese','Ground Beef and Cheese']}]},
+ {name:'Croiwiches',groups:[{items:[
+  D('Lady Loafella Croiwich Chicken','Flaky butter croissant sandwich with a filling of creamy coriander pesto chicken.','1-8-300x300.jpg')
+ ],more:['Lady Loafella Croiwich Veg','Lady Loafella Croiwich Beef']}]},
+ {name:'Burgers',groups:[{items:[
+  D('Filet-O-Fish Burger','Freshly baked soft buns stacked with tempura-fried basa fish, coleslaw and dill tartar sauce.','1-7-300x300.jpg'),
+  D('Loafella Ultimate Chicken Burger','','2-3-300x300.jpg'),
+  D('Loafella Ultimate Beef Burger','','3-1-300x300.jpg')
+ ],more:['Cauliflower Sweet Chilli Cheese Burger','Crispy Cottage Cheese Burger']}]},
+ {name:'Risottos',groups:[{items:[
+  D('Sundried Tomato Peanut Pesto Risotto','Authentic Italian arborio rice, slow cooked with a paste of sundried tomatoes, roasted peanuts and fresh basil, finished with cream and cheese, topped with arugula and sundried tomatoes.','1-9-300x300.jpg'),
+  D('Truffle Mushroom Risotto','A truffle oil-infused, slow-cooked arborio rice, mixed with mushrooms, double cream and parmesan cheese.','2-4-300x300.jpg')
+ ],more:[]}]},
+ {name:'Pastas',groups:[{items:[
+  D('Creme Di Funghi Penne (A La Truffle)','Freshly cooked penne pasta, tossed in a truffle oil-infused cheesy creamy mushroom sauce, topped with parmesan-crusted chicken strips.','1-10-300x300.jpg'),
+  D('Mac ‘N’ Beef','','2-5-300x300.jpg')
+ ],more:['Spaghetti Aglio e Olio','Pasta Pesto','Spaghetti Chicken Casserole']}]},
+ {name:'Home Made Fresh Pastas',groups:[{items:[
+  D('Spinach and Ricotta Cannelloni','Pasta tubes filled with a creamy spinach, mushrooms and homemade ricotta mix, baked with mozzarella and parmesan cheese.','1-11-300x300.jpg'),
+  D('Beef and Mushroom Lasagne','Layers of rich cheesy meat with roasted mushrooms, baked to perfection, served with salad and toast.','2-6-300x300.jpg'),
+  D('Braised Beef Ragu Fettucine','Freshly made and boiled fettuccine tossed in slow-cooked beef ragu, finished with cream and parmesan cheese.','3-2-300x300.jpg')
+ ],more:['Tortellini with Chicken Pâté and Rosemary','Tortellini with Thyme and Roasted Mushrooms']}]},
+ {name:'Main Courses',groups:[{items:[
+  D('Pan-Seared Sea Bass with Creamy Lemony Parmesan Risotto','Well-seasoned pan-seared Chilean sea bass (or basa fish) on a bed of creamy lemon and herb risotto, topped with red pepper coulis, buttery garlic, capers, olives and cherry tomatoes.','1-12-300x300.jpg'),
+  D('Chicken Fried Steak with Truffle Oil Infused Mushroom Sauce','Parmesan-crumbed and fried chicken escalope on a bed of creamy mashed potatoes, topped with truffle oil-infused creamy mushroom sauce and arugula leaves, served with skinny fries.','2-7-300x300.jpg')
+ ],more:['Fish N Chips']}]},
+ {name:'Desserts',groups:[{items:[
+  D('Caramelized New York Cheesecake with Blueberry Compote','','1-13-300x300.jpg')
+ ],more:['Sticky Toffee Pudding','Almond Cake with Vanilla Ice Cream']}]},
+ {name:'Beverages',groups:[
+  {title:'Artisanal Coffees',items:[],more:['V60 (Hot / Cold)','Classic Cold Brew','French Press']},
+  {title:'Iced Cold Coffees',items:[
+    D('Espresso Lemonade','','1-300x300.png',B),
+    D('Iced Caramel Latte','','2-300x300.png',B)
+  ],more:['Iced Americano','Iced Latte','French Vanilla Iced Latte','Iced Spanish Latte']},
+  {title:'Classic Coffees',items:[D('Cafe Latte','','1-1-300x300.png',B)],more:['Espresso','Americano','Cappuccino','Flat White','Cortado','Hot Spanish Latte','French Vanilla Hot Latte','Caramel Macchiato']},
+  {title:'Frappes',items:[D('Belgium Mocha Frappe','A perfect blend of the finest Belgian milk chocolate and espresso.','1-3-300x300.png',B)],more:['Classic Café Frappe','Frappe Caramello']},
+  {title:'Signature Coffee Mocktails',items:[
+    D('Maison Noir','Refreshing Valencia orange and cold brew sweetened with Okinawa black sugar.','2-2-300x300.png',B),
+    D('Citrus Ginger Cold Brew','Valencia orange juice, honey and ginger ale.','1-4-300x300.png',B)
+  ],more:['Espresso Tonic Water','Coffee Cherry Burst']},
+  {title:'Signature Hot Chocolate',items:[
+    D('Nilgiri Spiced Hot Chocolate','Our signature single origin dark chocolate with a hint of cinnamon powder.','1-2-300x300.png',B),
+    D('Orange Zest Hot Chocolate','Single origin dark chocolate infused with Valencia orange zest, topped with marshmallow fluff.','2-1-300x300.png',B),
+    D('Signature Hot Chocolate with Marshmallows','Single origin dark chocolate with marshmallow fluff.','3-300x300.png',B)
+  ],more:[]},
+  {title:'Mojito',items:[],more:['Virgin Mojito','Orange','Kiwi','Watermelon']},
+  {title:'Spritzers',items:[
+    D('Passion Fruit Sangria','','3-1-300x300.png',B),
+    D('Coconut Cucumber','','2-3-300x300.png',B),
+    D('Blood Orange Habanero','','1-7-300x300.png',B)
+  ],more:['Mango Jalapeno','Peach Ginger Royale']},
+  {title:'Smoothies',items:[D('Triple Berry','','1-5-300x300.png',B)],more:['Alphonso Mango']},
+  {title:'Signature Thick Shakes',items:[D('Brownie Thick Shake','','1-6-300x300.png',B)],more:['Fig, Honey and Dates Shake','Lotus Biscoff','Tender Coconut Mousse Shake']},
+  {title:'Fresh Juice',items:[],more:['Citrus Orange','Watermelon','Carrot Beetroot Ginger','Apple Beetroot Carrot']},
+  {title:'Hot Tea',items:[],more:['Darjeeling Tea','Earl Grey','Green Tea','Chamomile']},
+  {title:'Kombucha',items:[],more:['Ask at the café for today’s flavours']}
+ ]}
+];
+
+/* ---------- MENU UI ---------- */
+const tabsEl=document.getElementById('tabs');
+const out=document.getElementById('menu-out');
+const q=document.getElementById('q');
+let active=MENU[0].name; // category name or '__all'
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function buildTabs(){
+  const names=['All',...MENU.map(c=>c.name)];
+  tabsEl.innerHTML=names.map(n=>{
+    const val=n==='All'?'__all':n;
+    return `<button class="tab" type="button" data-v="${esc(val)}" aria-pressed="${val===active}">${esc(n)}</button>`;
+  }).join('');
+}
+function dishHTML(x){
+  const img=x.i?`<div class="ph"><img src="${x.i}" alt="${esc(x.n)}" loading="lazy" width="104" height="104"></div>`:'';
+  return `<article class="dish${x.i?'':' noimg'}">${img}<div><h5>${esc(x.n)}</h5>${x.d?`<p>${esc(x.d)}</p>`:''}</div></article>`;
+}
+function render(){
+  const term=q.value.trim().toLowerCase();
+  const showAll=term||active==='__all';
+  let total=0,html='';
+  MENU.forEach(cat=>{
+    if(!showAll&&cat.name!==active)return;
+    let catHTML='';
+    cat.groups.forEach(g=>{
+      const items=g.items.filter(x=>!term||(x.n+' '+x.d).toLowerCase().includes(term));
+      const more=g.more.filter(m=>!term||m.toLowerCase().includes(term));
+      if(!items.length&&!more.length)return;
+      total+=items.length+more.length;
+      if(g.title)catHTML+=`<h4>${esc(g.title)}</h4>`;
+      if(items.length)catHTML+=`<div class="dishes">${items.map(dishHTML).join('')}</div>`;
+      if(more.length)catHTML+=`${items.length?'<p class="more-label">Also on the menu</p>':''}<ul class="more">${more.map(m=>`<li>${esc(m)}</li>`).join('')}</ul>`;
+    });
+    if(catHTML)html+=`<div class="cat"><h3>${esc(cat.name)}</h3>${catHTML}</div>`;
+  });
+  if(!total){
+    out.innerHTML=`<div class="empty"><p style="margin-inline:auto">No dishes match &ldquo;${esc(q.value)}&rdquo;.</p><button class="btn btn-outline-dark" type="button" id="clear">Clear search</button></div>`;
+    document.getElementById('clear').onclick=()=>{q.value='';render();q.focus()};
+    return;
+  }
+  out.innerHTML=`<p class="count">${total} ${total===1?'item':'items'}${term?' found':''}</p>${html}`;
+}
+tabsEl.addEventListener('click',e=>{
+  const b=e.target.closest('.tab');if(!b)return;
+  active=b.dataset.v;q.value='';
+  buildTabs();render();
+});
+q.addEventListener('input',render);
+buildTabs();render();
+
+/* ---------- GALLERY ---------- */
+const G='https://ladyloafella.com/wp-content/uploads/';
+const PICS=['2022/07/l6.jpg','2022/07/l7.jpg','2022/07/l8.jpg','2022/07/HAC00191-copy.jpg','2022/07/HAC00090-copy.jpg','2022/07/HAC00095.jpg','2022/07/HAC00096.jpg','2022/07/HAC00099.jpg','2022/07/l2.jpg','2022/07/l3.jpg','2022/07/l4.jpg','2022/07/l5.jpg','2022/07/HAC00431-copy.jpg','2022/07/HAC00290-3-copy.jpg','2022/07/HAC00331.jpg','2022/07/HAC00380.jpg','2022/07/HAC00470-copy.jpg','2022/07/HAC00547-2-copy.jpg','2022/07/HAC00403-copy.jpg','2022/08/e5-1.jpg','2022/08/e6-1.jpg','2022/08/e7-1.jpg','2022/08/e1-1.jpg','2022/08/e2-1.jpg','2022/07/l9-1.jpg','2022/07/HAC00216-copy.jpg','2022/07/HAC00541-copy.jpg','2022/08/e3-1.jpg','2022/08/e4-1.jpg','2022/07/HAC00092-copy.jpg','2022/07/HAC00112.jpg','2022/07/HAC00121-copy.jpg','2022/07/HAC00134-copy-1-1.jpg','2022/07/HAC00119.jpg','2022/07/l10-1.jpg','2022/07/HAC00059-copy-1-1.jpg','2022/07/HAC00062-copy.jpg','2022/07/HAC00584.jpg','2022/07/HAC00596.jpg','2022/07/HAC00658-copy.jpg','2022/07/HAC01170-copy.jpg'];
+const mas=document.getElementById('masonry');
+mas.innerHTML=PICS.map((p,i)=>`<button type="button" data-i="${i}" aria-label="Open photo ${i+1} of ${PICS.length}"><img src="${G+p}" alt="Lady Loafella photo ${i+1}" loading="lazy"></button>`).join('');
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img');
+let cur=0;
+function show(i){cur=(i+PICS.length)%PICS.length;lbImg.src=G+PICS[cur];lbImg.alt=`Lady Loafella photo ${cur+1}`}
+mas.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;show(+b.dataset.i);lb.showModal()});
+document.getElementById('lb-close').onclick=()=>lb.close();
+document.getElementById('lb-prev').onclick=()=>show(cur-1);
+document.getElementById('lb-next').onclick=()=>show(cur+1);
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-inner'))lb.close()});
+lb.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+
+/* ---------- NAV ---------- */
+const burger=document.getElementById('burger'),links=document.getElementById('links');
+burger.addEventListener('click',()=>{
+  const o=links.classList.toggle('open');
+  burger.setAttribute('aria-expanded',o);
+  burger.setAttribute('aria-label',o?'Close menu':'Open menu');
+});
+links.addEventListener('click',e=>{if(e.target.closest('a')){links.classList.remove('open');burger.setAttribute('aria-expanded',false)}});
+const spy={home:'#home',about:'#about',menu:'#menu',gallery:'#gallery',contact:'#contact'};
+const linkEls=[...links.querySelectorAll('a')];
+const io=new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(en.isIntersecting){
+      linkEls.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));
+    }
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+Object.keys(spy).forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)});
+
+/* ---------- SCROLL EXTRAS ---------- */
+const prog=document.getElementById('progress'),totop=document.getElementById('totop');
+let tick=false;
+function onScroll(){
+  const h=document.documentElement.scrollHeight-innerHeight;
+  prog.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')';
+  totop.classList.toggle('show',scrollY>700);
+  tick=false;
+}
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
+totop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+onScroll();
+document.querySelectorAll('.story .wrap>*,.owner .wrap>*,.fact,.forte .wrap>*,.forte li,.masonry button,.menu-sec .head,.gallery .head,.reviews .wrap>*,.contact .wrap>*').forEach(el=>el.classList.add('reveal'));
+const rio=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');rio.unobserve(en.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>rio.observe(el));
+
+/* ---------- SCROLL SCENES ---------- */
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const hh=document.querySelector('.hero h1');
+if(hh&&!calm){
+  hh.classList.remove('rise');
+  hh.innerHTML=hh.textContent.trim().split(/\s+/).map((w,i)=>`<span class="w"><span style="animation-delay:${(.1+i*.1).toFixed(2)}s">${i>=3?`<em>${w}</em>`:w}</span></span>`).join(' ');
+}
+const sh=document.querySelector('.story h2');
+let sw=[];
+if(sh&&!calm){
+  sh.innerHTML=sh.textContent.trim().split(/\s+/).map((w,i)=>`<span class="sw${i>=7?' it':''}">${w}</span>`).join(' ');
+  sw=[...sh.children];
+}
+const words=['Sourdough','Croiwiches','Garlic bread','Fresh pasta','Risotto','Cheesecake','Cold brew','Hot chocolate'];
+const rowsEl=[...document.querySelectorAll('.marq .row')];
+rowsEl.forEach(r=>{r.innerHTML=Array(6).fill(words.map(w=>`<span>${w}</span><i>&bull;</i>`).join('')).join('')});
+const pars=[['.arch.a1 img',.06],['.arch.a2 img',.1],['.owner .portrait img',.07],['.forte .pic img',.07]].map(([s,k])=>({el:document.querySelector(s),k})).filter(x=>x.el);
+const cards=[...document.querySelectorAll('.purpose .grid .col')];
+let sceneTick=false;
+function scenes(){
+  sceneTick=false;
+  if(calm)return;
+  const vh=innerHeight,y=scrollY;
+  pars.forEach(({el,k})=>{
+    if(!el.isConnected)return;
+    const r=el.parentElement.getBoundingClientRect();
+    if(r.bottom<-120||r.top>vh+120)return;
+    const d=r.top+r.height/2-vh/2;
+    el.style.transform=`translate3d(0,${(-d*k).toFixed(1)}px,0) scale(1.2)`;
+  });
+  rowsEl.forEach((r,i)=>{
+    const w=r.scrollWidth;
+    const x=i?(-w/2+y*.35):(-y*.35);
+    r.style.transform=`translate3d(${x.toFixed(1)}px,0,0)`;
+  });
+  if(sw.length){
+    const r=sh.getBoundingClientRect();
+    const p=clamp((vh*.8-r.top)/(r.height+vh*.25));
+    const n=Math.round(p*sw.length);
+    sw.forEach((s,i)=>s.classList.toggle('on',i<n));
+  }
+  cards.forEach((c,i)=>{
+    const nx=cards[i+1];
+    if(!nx){c.style.transform='';return}
+    const top=parseFloat(getComputedStyle(c).top)||0;
+    const dist=nx.getBoundingClientRect().top-top;
+    const t=clamp(1-dist/(c.offsetHeight+44));
+    c.style.transform=`scale(${(1-.06*t).toFixed(3)})`;
+  });
+}
+function queueScenes(){if(!sceneTick){sceneTick=true;requestAnimationFrame(scenes)}}
+addEventListener('scroll',queueScenes,{passive:true});
+addEventListener('resize',queueScenes);
+addEventListener('load',queueScenes);
+scenes();
+
+/* ---------- IMAGE FALLBACK ---------- */
+document.addEventListener('error',e=>{
+  const im=e.target;
+  if(im&&im.tagName==='IMG'){const p=im.parentElement;im.remove();if(p)p.classList.add('noimg-fallback')}
+},true);
+</script>
+</body>
+</html>
